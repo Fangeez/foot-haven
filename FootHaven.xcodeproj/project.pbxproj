@@ -7,7 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		A315819C27E8C60F00911CC2 /* LaunchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A315819B27E8C60F00911CC2 /* LaunchView.swift */; };
+		A319328727F49B64003AA4DE /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A319328627F49B63003AA4DE /* NetworkManager.swift */; };
+		A319328B27F49E32003AA4DE /* PlayerData.swift in Sources */ = {isa = PBXBuildFile; fileRef = A319328A27F49E32003AA4DE /* PlayerData.swift */; };
+		A319328D27F49EB6003AA4DE /* PlayerStatsData.swift in Sources */ = {isa = PBXBuildFile; fileRef = A319328C27F49EB6003AA4DE /* PlayerStatsData.swift */; };
+		A319328F27F49EC5003AA4DE /* PlayerInfoData.swift in Sources */ = {isa = PBXBuildFile; fileRef = A319328E27F49EC5003AA4DE /* PlayerInfoData.swift */; };
 		A3CDB6D227D2689F00716FEB /* FootHavenApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3CDB6D127D2689F00716FEB /* FootHavenApp.swift */; };
 		A3CDB6D427D2689F00716FEB /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3CDB6D327D2689F00716FEB /* ContentView.swift */; };
 		A3CDB6D627D268A100716FEB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A3CDB6D527D268A100716FEB /* Assets.xcassets */; };
@@ -15,7 +18,11 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		A315819B27E8C60F00911CC2 /* LaunchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchView.swift; sourceTree = "<group>"; };
+		A319328527F2AE90003AA4DE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		A319328627F49B63003AA4DE /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
+		A319328A27F49E32003AA4DE /* PlayerData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerData.swift; sourceTree = "<group>"; };
+		A319328C27F49EB6003AA4DE /* PlayerStatsData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerStatsData.swift; sourceTree = "<group>"; };
+		A319328E27F49EC5003AA4DE /* PlayerInfoData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerInfoData.swift; sourceTree = "<group>"; };
 		A3CDB6CE27D2689F00716FEB /* FootHaven.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FootHaven.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A3CDB6D127D2689F00716FEB /* FootHavenApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FootHavenApp.swift; sourceTree = "<group>"; };
 		A3CDB6D327D2689F00716FEB /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -38,7 +45,6 @@
 			isa = PBXGroup;
 			children = (
 				A3CDB6D327D2689F00716FEB /* ContentView.swift */,
-				A315819B27E8C60F00911CC2 /* LaunchView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -46,6 +52,10 @@
 		A315819A27E8C5AE00911CC2 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				A319328627F49B63003AA4DE /* NetworkManager.swift */,
+				A319328A27F49E32003AA4DE /* PlayerData.swift */,
+				A319328C27F49EB6003AA4DE /* PlayerStatsData.swift */,
+				A319328E27F49EC5003AA4DE /* PlayerInfoData.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -69,6 +79,7 @@
 		A3CDB6D027D2689F00716FEB /* FootHaven */ = {
 			isa = PBXGroup;
 			children = (
+				A319328527F2AE90003AA4DE /* Info.plist */,
 				A315819A27E8C5AE00911CC2 /* Models */,
 				A3CDB6D127D2689F00716FEB /* FootHavenApp.swift */,
 				A315819927E8C5A700911CC2 /* Views */,
@@ -156,8 +167,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A319328F27F49EC5003AA4DE /* PlayerInfoData.swift in Sources */,
+				A319328727F49B64003AA4DE /* NetworkManager.swift in Sources */,
 				A3CDB6D427D2689F00716FEB /* ContentView.swift in Sources */,
-				A315819C27E8C60F00911CC2 /* LaunchView.swift in Sources */,
+				A319328B27F49E32003AA4DE /* PlayerData.swift in Sources */,
+				A319328D27F49EB6003AA4DE /* PlayerStatsData.swift in Sources */,
 				A3CDB6D227D2689F00716FEB /* FootHavenApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -292,9 +306,9 @@
 				DEVELOPMENT_TEAM = 6FA2HP2XU2;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = FootHaven/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
-				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -321,9 +335,9 @@
 				DEVELOPMENT_TEAM = 6FA2HP2XU2;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = FootHaven/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
-				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
