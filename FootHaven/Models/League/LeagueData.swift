@@ -2,5 +2,5 @@
 
 struct LeagueData: Codable {
     let league: LeagueInfoData
-    let standings: [LeagueStatsData]
+    let standings: [[TeamStandingData]]
 }
