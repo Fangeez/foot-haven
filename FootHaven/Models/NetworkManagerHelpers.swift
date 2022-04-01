@@ -2,34 +2,33 @@
 
 import Foundation
 
-func parsePlayerJSON(_ playerData: Data) -> PlayerData?{
+func parsePlayerJSON(_ playerData: Data) -> PlayerData? {
     let decoder = JSONDecoder()
     do {
         let decodedData = try decoder.decode(PlayerData.self, from: playerData)
         return decodedData
-    } catch{
+    } catch {
         print(error)
         return nil
     }
 }
-func parseTeamJSON(_ teamData: Data) -> TeamData?{
+func parseTeamJSON(_ teamData: Data) -> TeamData? {
     let decoder = JSONDecoder()
     do {
         let decodedData = try decoder.decode(TeamData.self, from: teamData)
         return decodedData
-    } catch{
+    } catch {
         print(error)
         return nil
     }
 }
-func parseLeagueJSON(_ leagueData: Data) -> LeagueData?{
+func parseLeagueJSON(_ leagueData: Data) -> LeagueData? {
     let decoder = JSONDecoder()
     do {
         let decodedData = try decoder.decode(LeagueData.self, from: leagueData)
         return decodedData
-    } catch{
+    } catch {
         print(error)
         return nil
     }
 }
-
