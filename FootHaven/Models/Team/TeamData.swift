@@ -6,7 +6,6 @@ struct TeamData: Codable {
     let fixtures: Fixtures
 }
 
-
 struct Fixtures: Codable {
     let played: Played
     let wins: Wins
@@ -14,7 +13,7 @@ struct Fixtures: Codable {
     let loses: Loses
 }
 
-struct Played: Codable{
+struct Played: Codable {
     let total: Int
 }
 
@@ -29,6 +28,3 @@ struct Draws: Codable {
 struct Loses: Codable {
     let total: Int
 }
-
-
-

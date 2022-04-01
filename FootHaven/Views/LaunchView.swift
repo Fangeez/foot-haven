@@ -9,7 +9,7 @@ import SwiftUI
 
 struct LaunchView: View {
     var body: some View {
-        ZStack{
+        ZStack {
             Color("AppColor")
                 .ignoresSafeArea()
             Image("Logo")

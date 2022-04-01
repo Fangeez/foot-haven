@@ -10,4 +10,3 @@ struct PlayerInfoData: Codable {
     let weight: String
     let photo: String?
 }
-
