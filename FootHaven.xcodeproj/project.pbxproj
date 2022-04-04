@@ -21,6 +21,9 @@
 		A31932A627F54FBC003AA4DE /* NetworkManagerHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = A31932A527F54FBC003AA4DE /* NetworkManagerHelpers.swift */; };
 		A31932AC27F62FF5003AA4DE /* WelcomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A31932AB27F62FF5003AA4DE /* WelcomeView.swift */; };
 		A31932AE27F6317A003AA4DE /* WelcomeOptionCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A31932AD27F6317A003AA4DE /* WelcomeOptionCellView.swift */; };
+		A330D87627FB681A005BBC03 /* PlayerSearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A330D87527FB681A005BBC03 /* PlayerSearchView.swift */; };
+		A330D87827FB6839005BBC03 /* TeamSearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A330D87727FB6839005BBC03 /* TeamSearchView.swift */; };
+		A330D87A27FB685A005BBC03 /* LeagueSearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A330D87927FB685A005BBC03 /* LeagueSearchView.swift */; };
 		A3CDB6D227D2689F00716FEB /* FootHavenApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3CDB6D127D2689F00716FEB /* FootHavenApp.swift */; };
 		A3CDB6D427D2689F00716FEB /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3CDB6D327D2689F00716FEB /* ContentView.swift */; };
 		A3CDB6D627D268A100716FEB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A3CDB6D527D268A100716FEB /* Assets.xcassets */; };
@@ -43,6 +46,9 @@
 		A31932A527F54FBC003AA4DE /* NetworkManagerHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManagerHelpers.swift; sourceTree = "<group>"; };
 		A31932AB27F62FF5003AA4DE /* WelcomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeView.swift; sourceTree = "<group>"; };
 		A31932AD27F6317A003AA4DE /* WelcomeOptionCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeOptionCellView.swift; sourceTree = "<group>"; };
+		A330D87527FB681A005BBC03 /* PlayerSearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerSearchView.swift; sourceTree = "<group>"; };
+		A330D87727FB6839005BBC03 /* TeamSearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamSearchView.swift; sourceTree = "<group>"; };
+		A330D87927FB685A005BBC03 /* LeagueSearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeagueSearchView.swift; sourceTree = "<group>"; };
 		A3CDB6CE27D2689F00716FEB /* FootHaven.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FootHaven.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A3CDB6D127D2689F00716FEB /* FootHavenApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FootHavenApp.swift; sourceTree = "<group>"; };
 		A3CDB6D327D2689F00716FEB /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -67,6 +73,9 @@
 				A3CDB6D327D2689F00716FEB /* ContentView.swift */,
 				A31932AB27F62FF5003AA4DE /* WelcomeView.swift */,
 				A31932AD27F6317A003AA4DE /* WelcomeOptionCellView.swift */,
+				A330D87527FB681A005BBC03 /* PlayerSearchView.swift */,
+				A330D87727FB6839005BBC03 /* TeamSearchView.swift */,
+				A330D87927FB685A005BBC03 /* LeagueSearchView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -254,10 +263,13 @@
 				A319329727F4BAA6003AA4DE /* LeagueInfoData.swift in Sources */,
 				A319328D27F49EB6003AA4DE /* PlayerStatsData.swift in Sources */,
 				A319329927F4BAD3003AA4DE /* TeamStandingData.swift in Sources */,
+				A330D87A27FB685A005BBC03 /* LeagueSearchView.swift in Sources */,
 				A319329527F4B28B003AA4DE /* LeagueData.swift in Sources */,
 				A3CDB6D227D2689F00716FEB /* FootHavenApp.swift in Sources */,
+				A330D87827FB6839005BBC03 /* TeamSearchView.swift in Sources */,
 				A31932A627F54FBC003AA4DE /* NetworkManagerHelpers.swift in Sources */,
 				A31932AC27F62FF5003AA4DE /* WelcomeView.swift in Sources */,
+				A330D87627FB681A005BBC03 /* PlayerSearchView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
