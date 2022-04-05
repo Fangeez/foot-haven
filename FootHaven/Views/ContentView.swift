@@ -1,9 +1,4 @@
-//
-//  ContentView.swift
-//  FootHaven
-//
 //  Created by Harris Dawurang on 3/4/22.
-//
 
 import SwiftUI
 
