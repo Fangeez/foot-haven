@@ -9,7 +9,12 @@ import SwiftUI
 
 struct LeagueSearchView: View {
     var body: some View {
-        Text("League Search Here")
+        
+        VStack(spacing: 50) {
+            DropDownView(placeholder: "Select Country", dropDownList: ["England", "Spain", "Germany"])
+            DropDownView(placeholder: "Select League", dropDownList: ["Premier League", "La Liga", "Bundesliga"])
+            SearchButtonView(title: SearchButtonText.league)
+        }
     }
 }
 
