@@ -1,2 +1,2 @@
 # foot-haven
-An iOS soccer mobile app that is responsible for retrieving the statistics for a single team or player, and for drawing comparison - that is between two teams or two players. This includes things like goals scored, match form, fixture history, etc. 
+An iOS soccer mobile app that is responsible for retrieving the statistics for a player, team, or league. This includes things like goals scored, match form, fixture history, etc. This app provides a simple way of querying this information without having to dig through a whole lot of information like other web or mobile applications
