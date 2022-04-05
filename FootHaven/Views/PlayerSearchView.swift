@@ -1,9 +1,4 @@
-//
-//  PlayerSearchView.swift
-//  FootHaven
-//
 //  Created by Harris Dawurang on 4/4/22.
-//
 
 import SwiftUI
 
@@ -16,7 +11,7 @@ struct PlayerSearchView: View {
             DropDownView(placeholder: "Select Team", dropDownList: ["Manchester United", "Liverpool FC", "FC Barcelona"])
             DropDownView(placeholder: "Select Player", dropDownList: ["Lionel Messi", "Neymar Jr.", "Eden Hazard"])
             SearchButtonView(title: SearchButtonText.player)
-            
+
         }
     }
 }

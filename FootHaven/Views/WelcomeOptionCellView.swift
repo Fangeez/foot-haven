@@ -1,9 +1,4 @@
-//
-//  WelcomeOptionCellView.swift
-//  FootHaven
-//
 //  Created by Harris Dawurang on 3/31/22.
-//
 
 import SwiftUI
 

@@ -1,9 +1,4 @@
-//
-//  SearchButtonView.swift
-//  FootHaven
-//
 //  Created by Harris Dawurang on 4/4/22.
-//
 
 import SwiftUI
 
@@ -24,7 +19,7 @@ struct SearchButtonView: View {
                 RoundedRectangle(cornerRadius: 10)
                     .fill(Color("AppColor"))
             }
-            
+
         }
     }
 }
