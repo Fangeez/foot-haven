@@ -10,7 +10,8 @@ struct PlayerSearchView: View {
             DropDownView(placeholder: "Select League", dropDownList: ["Premier League", "La Liga", "Bundesliga"])
             DropDownView(placeholder: "Select Team", dropDownList: ["Manchester United", "Liverpool FC", "FC Barcelona"])
             DropDownView(placeholder: "Select Player", dropDownList: ["Lionel Messi", "Neymar Jr.", "Eden Hazard"])
-            SearchButtonView(title: SearchButtonText.player)
+            // TODO:- Update active
+            SearchButtonView(activeLink: .constant(true), title: SearchButtonText.player)
 
         }
     }

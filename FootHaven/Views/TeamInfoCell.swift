@@ -9,8 +9,9 @@ struct TeamInfoCell: View {
         ZStack {
             RoundedRectangle(cornerRadius: 10)
                 .fill(.white)
-                .frame(width: .infinity, height: 250, alignment: .center)
-            VStack(spacing: 15) {
+                .padding()
+
+            VStack(spacing: 30) {
                 Image(uiImage: teamLogo ?? UIImage())
                     .resizable()
                     .frame(width: 100, height: 100, alignment: .center)
@@ -18,6 +19,7 @@ struct TeamInfoCell: View {
                     .font(Font.system(size: 18))
             }
         }
+
     }
 }
 

@@ -6,16 +6,18 @@ struct StatisticsCell: View {
     var statNames: [String]
     var statNumbers: [Int]
     var body: some View {
-        VStack(spacing: 15) {
+        List {
+
             ForEach(Array(zip(statNames, statNumbers)), id: \.0) { pair in
                 StatRow(statName: pair.0, statNumber: "\(pair.1)")
             }
+            .background {
+                RoundedRectangle(cornerRadius: 10)
+                    .fill(Color.white)
+            }
         }
-        .padding()
-        .background {
-            RoundedRectangle(cornerRadius: 10)
-                .fill(Color.white)
-        }
+        .background(Color(""))
+
     }
 }
 
@@ -35,5 +37,6 @@ struct StatRow: View {
 struct TeamStatsCell_Previews: PreviewProvider {
     static var previews: some View {
         StatisticsCell(statNames: MockPreviews.teamStatNames, statNumbers: MockPreviews.teamStatNumbers)
+            .previewLayout(.sizeThatFits)
     }
 }
