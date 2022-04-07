@@ -8,7 +8,7 @@ struct LeagueSearchView: View {
         VStack(spacing: 50) {
             DropDownView(placeholder: "Select Country", dropDownList: ["England", "Spain", "Germany"])
             DropDownView(placeholder: "Select League", dropDownList: ["Premier League", "La Liga", "Bundesliga"])
-            SearchButtonView(title: SearchButtonText.league)
+            SearchButtonView(activeLink: .constant(true), title: SearchButtonText.league)
         }
     }
 }

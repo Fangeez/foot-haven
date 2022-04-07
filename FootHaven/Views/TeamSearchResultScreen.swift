@@ -3,6 +3,7 @@
 import SwiftUI
 
 struct TeamSearchResultScreen: View {
+    @Binding var activeLink: Bool
     var body: some View {
         // TODO:- Replace mock data with real data
         ZStack {
@@ -13,11 +14,19 @@ struct TeamSearchResultScreen: View {
                 StatisticsCell(statNames: MockPreviews.teamStatNames, statNumbers: MockPreviews.teamStatNumbers)
             }
         }
+        .navigationTitle("Team Stats")
+        .navigationBarTitleDisplayMode(.inline)
+        .navigationBarBackButtonHidden(true)
+        .toolbar {
+            ToolbarItem(placement: .navigationBarLeading) {
+                ToolbarBackButton(activeLink: $activeLink)
+            }
+        }
     }
 }
 
 struct TeamSearchResultScreen_Previews: PreviewProvider {
     static var previews: some View {
-        TeamSearchResultScreen()
+        TeamSearchResultScreen(activeLink: .constant(true))
     }
 }
