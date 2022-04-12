@@ -32,3 +32,14 @@ func parseLeagueJSON(_ leagueData: Data) -> LeagueData? {
         return nil
     }
 }
+
+func parseLeagueListJSON(_ leagueListData: Data) -> LeagueListsData? {
+    let decoder = JSONDecoder()
+    do {
+        let decodedData = try decoder.decode(LeagueListsData.self, from: leagueListData)
+        return decodedData
+    } catch {
+        print(error)
+        return nil
+    }
+}

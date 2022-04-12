@@ -18,3 +18,7 @@ struct MockPreviews {
     static let leagueName: String = "Premier League"
     static let leagueLogo: String = "ant.fill"
 }
+
+struct SearchOptions {
+    static let countries: [String] = ["England", "Spain", "Germany", "France", "Portugal"]
+}

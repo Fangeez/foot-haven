@@ -4,6 +4,8 @@ import SwiftUI
 
 struct DropDownView: View {
     @State var value = ""
+    @Binding var selection: String
+    
     var placeholder: String
     var dropDownList: [String]
     var body: some View {
@@ -11,6 +13,7 @@ struct DropDownView: View {
             ForEach(dropDownList, id: \.self) { client in
                 Button(client) {
                     self.value = client
+                    self.selection = value
                 }
             }
         } label: {
@@ -35,6 +38,6 @@ struct DropDownView: View {
 
 struct DropDownView_Previews: PreviewProvider {
     static var previews: some View {
-        DropDownView(placeholder: "Select Item", dropDownList: ["PSO", "PFA", "AIR", "HOT"])
+        DropDownView(selection: .constant(""), placeholder: "Select Item", dropDownList: ["PSO", "PFA", "AIR", "HOT"])
     }
 }
