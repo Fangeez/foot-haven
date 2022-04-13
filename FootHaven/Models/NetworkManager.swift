@@ -25,7 +25,7 @@ class NetworkManager: ObservableObject {
     @Published var height: String = ""
     @Published var weight: String = ""
     @Published var photo: String? = ""
-    
+
     // Team stats
     @Published var teamName: String = ""
     @Published var teamLogo: String = ""
@@ -33,18 +33,26 @@ class NetworkManager: ObservableObject {
     @Published var wins: Int = 0
     @Published var draws: Int = 0
     @Published var loses: Int = 0
-    
+
     // League stats
     @Published var leagueStandings: [TeamStandingData] = []
     @Published var leagueName: String = ""
     @Published var country: String = ""
     @Published var leagueLogo: String = ""
-    
+
     // Lists
     @Published var leagueLists: [String] = []
-    
+    @Published var teamLists: [String] = []
+    @Published var teamObjectLists: [TeamListInfo] = []
+    @Published var playerLists: [String] = []
+
+    // Dicts
+    @Published var leaguesDict: [String: Int] = [:]
+    @Published var teamsDict: [String: Int] = [:]
+    @Published var playersDict: [String: Int] = [:]
+
     private let baseUrl: String = "https://v3.football.api-sports.io"
-    
+
     private var apiKey: String {
         get {
             guard let filePath = Bundle.main.path(forResource: "APIFootball-Info", ofType: "plist") else {
@@ -57,32 +65,32 @@ class NetworkManager: ObservableObject {
             return value
         }
     }
-    
+
     func fetchPlayerStats(playerId: Int, season: Int) {
         let playerUrl = "\(baseUrl)?id=\(playerId)&season=\(season)"
         self.performStatsRequest(url: playerUrl, urlType: UrlTypes.player)
     }
-    
+
     func fetchTeamStats(teamId: Int, leagueId: Int, season: Int) {
         let teamUrl = "\(baseUrl)?team=\(teamId)&league=\(leagueId)&season=\(season)"
         self.performStatsRequest(url: teamUrl, urlType: UrlTypes.team)
     }
-    
+
     func fetchLeagueStats(leagueId: Int, season: Int) {
         let leagueUrl = "\(baseUrl)?league=\(leagueId)&season=\(season)"
         self.performStatsRequest(url: leagueUrl, urlType: UrlTypes.league)
     }
-    
+
     func fetchLeagueLists(country: String) {
         let leaguesUrl = "\(baseUrl)/leagues?country=\(country)&season=2021"
         let semaphore = DispatchSemaphore(value: 0)
-        
+
         var request = URLRequest(url: URL(string: leaguesUrl)!, timeoutInterval: Double.infinity)
         request.addValue(self.apiKey, forHTTPHeaderField: "x-rapidapi-key")
         request.addValue(self.baseUrl, forHTTPHeaderField: "x-rapidapi-host")
-        
+
         request.httpMethod = "GET"
-        
+
         let task = URLSession.shared.dataTask(with: request) { data, _, error in
             guard let data = data else {
                 print(String(describing: error))
@@ -90,41 +98,107 @@ class NetworkManager: ObservableObject {
                 return
             }
             print(String(data: data, encoding: .utf8)!)
-            
+
             if let parsedData = parseLeagueListJSON(data) {
                 DispatchQueue.main.async {
                     var leagueList: [String] = []
+                    var leaguesDict: [String: Int] = [:]
                     for league in parsedData.response {
+                        leaguesDict[league.league.name] = league.league.id
                         leagueList.append(league.league.name)
                     }
+                    self.leaguesDict = leaguesDict
                     self.leagueLists = leagueList
                 }
             }
-            
+
             semaphore.signal()
         }
-        
+
         task.resume()
         semaphore.wait()
     }
-    
-    func fetchTeamLists(league: String) {
-        
+
+    func fetchTeamLists(league: Int) {
+        let teamsUrl = "\(baseUrl)/teams?league=\(league)&season=2021"
+        let semaphore = DispatchSemaphore(value: 0)
+        var request = URLRequest(url: URL(string: teamsUrl)!, timeoutInterval: Double.infinity)
+        request.addValue(self.apiKey, forHTTPHeaderField: "x-rapidapi-key")
+        request.addValue(self.baseUrl, forHTTPHeaderField: "x-rapidapi-host")
+
+        request.httpMethod = "GET"
+
+        let task = URLSession.shared.dataTask(with: request) { data, _, error in
+            guard let data = data else {
+                print(String(describing: error))
+                semaphore.signal()
+                return
+            }
+            print(String(data: data, encoding: .utf8)!)
+
+            if let parsedData = parseTeamListJSON(data) {
+                DispatchQueue.main.async {
+                    var teamList: [String] = []
+                    var teamsDict: [String: Int] = [:]
+                    for team in parsedData.response {
+                        teamList.append(team.team.name)
+                        teamsDict[team.team.name] = team.team.id
+                    }
+                    self.teamLists = teamList
+                    self.teamsDict = teamsDict
+                }
+            }
+            semaphore.signal()
+        }
+        task.resume()
+        semaphore.wait()
     }
-    
-    func fetchPlayerLists(team: String) {
-        
+
+    func fetchPlayerLists(team: Int, league: Int) {
+        let playersUrl = "\(baseUrl)/players?league=\(league)&team=\(team)&season=2021"
+        let semaphore = DispatchSemaphore(value: 0)
+        var request = URLRequest(url: URL(string: playersUrl)!, timeoutInterval: Double.infinity)
+        request.addValue(self.apiKey, forHTTPHeaderField: "x-rapidapi-key")
+        request.addValue(self.baseUrl, forHTTPHeaderField: "x-rapidapi-host")
+
+        request.httpMethod = "GET"
+
+        let task = URLSession.shared.dataTask(with: request) { data, _, error in
+            guard let data = data else {
+                print(String(describing: error))
+                semaphore.signal()
+                return
+            }
+            print(String(data: data, encoding: .utf8)!)
+
+            if let parsedData = parsePlayerListJSON(data) {
+                DispatchQueue.main.async {
+                    var playerList: [String] = []
+                    var playerDict: [String: Int] = [:]
+                    for player in parsedData.response {
+                        let fullName = "\(player.player.firstname) \(player.player.lastname)"
+                        playerList.append(fullName)
+                        playerDict[fullName] = player.player.id
+                    }
+                    self.playerLists = playerList
+                    self.playersDict = playerDict
+                }
+            }
+            semaphore.signal()
+        }
+        task.resume()
+        semaphore.wait()
     }
-    
+
     private func performStatsRequest(url: String, urlType: UrlTypes) {
         let semaphore = DispatchSemaphore(value: 0)
-        
+
         var request = URLRequest(url: URL(string: url)!, timeoutInterval: Double.infinity)
         request.addValue(self.apiKey, forHTTPHeaderField: "x-rapidapi-key")
         request.addValue(self.baseUrl, forHTTPHeaderField: "x-rapidapi-host")
-        
+
         request.httpMethod = "GET"
-        
+
         let task = URLSession.shared.dataTask(with: request) { data, _, error in
             guard let data = data else {
                 print(String(describing: error))
@@ -137,23 +211,24 @@ class NetworkManager: ObservableObject {
                     DispatchQueue.main.async {
                         self.firstname = parsedData.player.firstname
                         self.lastname = parsedData.player.lastname
-                        self.height = parsedData.player.height
-                        self.weight = parsedData.player.weight
+                        self.height = parsedData.player.height ?? "-"
+                        self.weight = parsedData.player.weight ?? "-"
                         self.nationality = parsedData.player.nationality
-                        self.age = parsedData.player.age
+                        self.age = parsedData.player.age ?? 0
                         if let playerPhoto = parsedData.player.photo {
                             self.photo = playerPhoto
                         }
-                        self.goals = parsedData.statistics[0].goals.total
-                        self.assists = parsedData.statistics[0].goals.assists
-                        self.gamesPlayed = parsedData.statistics[0].games.appearances
-                        self.tackles = parsedData.statistics[0].tackles.total
-                        self.dribbleAttempts = parsedData.statistics[0].dribbles.attempts
-                        self.successfulDribbles = parsedData.statistics[0].dribbles.success
-                        self.totalPasses = parsedData.statistics[0].passes.total
-                        self.keyPasses = parsedData.statistics[0].passes.key
-                        self.interceptions = parsedData.statistics[0].tackles.interceptions
-                        if let safeConceded = parsedData.statistics[0].goals.conceded, let safeSaved = parsedData.statistics[0].goals.saved {
+                        self.goals = parsedData.statistics[0].goals.total ?? 0
+                        self.assists = parsedData.statistics[0].goals.assists ?? 0
+                        self.gamesPlayed = parsedData.statistics[0].games.appearances ?? 0
+                        self.tackles = parsedData.statistics[0].tackles.total ?? 0
+                        self.dribbleAttempts = parsedData.statistics[0].dribbles.attempts ?? 0
+                        self.successfulDribbles = parsedData.statistics[0].dribbles.success ?? 0
+                        self.totalPasses = parsedData.statistics[0].passes.total ?? 0
+                        self.keyPasses = parsedData.statistics[0].passes.key ?? 0
+                        self.interceptions = parsedData.statistics[0].tackles.interceptions ?? 0
+                        if let safeConceded = parsedData.statistics[0].goals.conceded,
+                            let safeSaved = parsedData.statistics[0].goals.saved {
                             self.conceded = safeConceded
                             self.saved = safeSaved
                         }
@@ -186,9 +261,9 @@ class NetworkManager: ObservableObject {
             }
             semaphore.signal()
         }
-        
+
         task.resume()
         semaphore.wait()
     }
-    
+
 }
