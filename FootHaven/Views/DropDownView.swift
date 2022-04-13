@@ -5,7 +5,7 @@ import SwiftUI
 struct DropDownView: View {
     @State var value = ""
     @Binding var selection: String
-    
+
     var placeholder: String
     var dropDownList: [String]
     var body: some View {

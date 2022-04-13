@@ -43,3 +43,25 @@ func parseLeagueListJSON(_ leagueListData: Data) -> LeagueListsData? {
         return nil
     }
 }
+
+func parseTeamListJSON(_ teamListData: Data) -> TeamListsData? {
+    let decoder = JSONDecoder()
+    do {
+        let decodedData = try decoder.decode(TeamListsData.self, from: teamListData)
+        return decodedData
+    } catch {
+        print(error)
+        return nil
+    }
+}
+
+func parsePlayerListJSON(_ playerListData: Data) -> PlayerListsData? {
+    let decoder = JSONDecoder()
+    do {
+        let decodedData = try decoder.decode(PlayerListsData.self, from: playerListData)
+        return decodedData
+    } catch {
+        print(error)
+        return nil
+    }
+}

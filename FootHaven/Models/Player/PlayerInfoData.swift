@@ -5,8 +5,8 @@ struct PlayerInfoData: Codable {
     let firstname: String
     let lastname: String
     let nationality: String
-    let age: Int
-    let height: String
-    let weight: String
+    let age: Int?
+    let height: String?
+    let weight: String?
     let photo: String?
 }

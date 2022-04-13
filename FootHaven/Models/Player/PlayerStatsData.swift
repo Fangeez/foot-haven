@@ -16,28 +16,28 @@ struct Team: Codable {
 }
 
 struct Goals: Codable {
-    let total: Int
-    let assists: Int
+    let total: Int?
+    let assists: Int?
     let conceded: Int?
     let saved: Int?
 }
 
 struct Games: Codable {
-    let appearances: Int
-    let minutes: Int
+    let appearances: Int?
+    let minutes: Int?
 }
 
 struct Tackles: Codable {
-    let total: Int
-    let interceptions: Int
+    let total: Int?
+    let interceptions: Int?
 }
 
 struct Dribbles: Codable {
-    let attempts: Int
-    let success: Int
+    let attempts: Int?
+    let success: Int?
 }
 
 struct Passes: Codable {
-    let total: Int
-    let key: Int
+    let total: Int?
+    let key: Int?
 }
