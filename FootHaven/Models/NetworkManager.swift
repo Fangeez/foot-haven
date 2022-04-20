@@ -253,13 +253,14 @@ class NetworkManager: ObservableObject {
                 if let parsedData = parseLeagueJSON(data) {
                     DispatchQueue.main.async {
                         let leagueStandings = parsedData.response[0].league.standings[0]
+                        self.leagueStandings = []
+                        self.leagueStandingPoints = []
                         for team in leagueStandings {
                             let name = team.team.name
                             let points = team.points
                             self.leagueStandings.append(name)
                             self.leagueStandingPoints.append(points)
                         }
-                        // print(self.leagueStandings)
                         self.leagueName = parsedData.response[0].league.name
                         self.country = parsedData.response[0].league.country
                         if let parsedLogo = parsedData.response[0].league.logo {
