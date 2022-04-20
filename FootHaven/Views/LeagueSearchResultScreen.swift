@@ -3,18 +3,25 @@
 import SwiftUI
 
 struct LeagueSearchResultScreen: View {
-    var standings: [String]
-    var points: [Int]
+    @Binding var showLeagueResultScreen: Bool
+    var leagueName: String
+    var leagueLogo: UIImage?
+    var leagueStandings: [String]
+    var leagueStandingPoints: [Int]
     var body: some View {
         VStack(alignment: .center, spacing: 40) {
-            TeamInfoCell(teamName: MockPreviews.leagueName, teamLogo: UIImage(systemName: MockPreviews.leagueLogo))
-            StatisticsCell(statNames: standings, statNumbers: points)
-            }
+            TeamInfoCell(teamName: leagueName, teamLogo: leagueLogo)
+            StatisticsCell(statNames: leagueStandings, statNumbers: leagueStandingPoints)
+        }
     }
-    }
+}
 
 struct LeagueSearchResultScreen_Previews: PreviewProvider {
     static var previews: some View {
-        LeagueSearchResultScreen(standings: MockPreviews.leagueStandings, points: MockPreviews.leaguePoints)
+        LeagueSearchResultScreen(showLeagueResultScreen: .constant(true),
+                                 leagueName: MockPreviews.leagueName,
+                                 leagueLogo: UIImage(systemName: MockPreviews.leagueLogo),
+                                 leagueStandings: MockPreviews.leagueStandings,
+                                 leagueStandingPoints: MockPreviews.leaguePoints)
     }
 }

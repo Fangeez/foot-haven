@@ -1,9 +1,4 @@
-//
-//  ToolbarBackButton.swift
-//  FootHaven
-//
 //  Created by Harris Dawurang on 4/6/22.
-//
 
 import SwiftUI
 
@@ -18,7 +13,6 @@ struct ToolbarBackButton: View {
                 .frame(width: 20, height: 20, alignment: .leading)
                 .foregroundColor(Color("AppColor"))
         }
-
     }
 }
 

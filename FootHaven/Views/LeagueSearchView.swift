@@ -11,19 +11,33 @@ struct LeagueSearchView: View {
 
     var body: some View {
 
-        VStack(spacing: 50) {
-            DropDownView(selection: $countrySelection,
-                         placeholder: "Select Country",
-                         dropDownList: SearchOptions.countries)
-            .onChange(of: countrySelection) { _ in
-                networkManager.fetchLeagueLists(country: countrySelection)
+        NavigationView {
+            VStack(spacing: 50) {
+                DropDownView(selection: $countrySelection,
+                             placeholder: "Select Country",
+                             dropDownList: SearchOptions.countries)
+                .onChange(of: countrySelection) { _ in
+                    networkManager.fetchLeagueLists(country: countrySelection)
+                }
+                DropDownView(selection: $leagueSelection,
+                             placeholder: "Select League",
+                             dropDownList: networkManager.leagueLists)
+                .onChange(of: leagueSelection) { _ in
+                    guard let leagueId = networkManager.leaguesDict[leagueSelection] else { return }
+                    networkManager.fetchLeagueStats(leagueId: leagueId)
+                }
+                NavigationLink(destination: LeagueSearchResultScreen(showLeagueResultScreen: $showLeagueResultScreen,
+                                                                     leagueName: networkManager.leagueName, leagueLogo: networkManager.leagueLogo,
+                                                                     leagueStandings: networkManager.leagueStandings,
+                                                                     leagueStandingPoints: networkManager.leagueStandingPoints),
+                               isActive: $showLeagueResultScreen) {
+                    SearchButtonView(activeLink: $showLeagueResultScreen,
+                                     title: SearchButtonText.league)
+                }
+
             }
-            DropDownView(selection: $leagueSelection,
-                         placeholder: "Select League",
-                         dropDownList: networkManager.leagueLists)
-            SearchButtonView(activeLink: $showLeagueResultScreen,
-                             title: SearchButtonText.league)
         }
+
     }
 }
 

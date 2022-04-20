@@ -6,4 +6,5 @@ struct LeagueInfoData: Codable {
     let country: String
     let logo: String?
     let season: Int
+    let standings: [[TeamStandingData]]
 }
