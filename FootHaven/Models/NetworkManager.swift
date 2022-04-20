@@ -4,6 +4,7 @@ import Foundation
 #if canImport(FoundationNetworking)
 import FoundationNetworking
 #endif
+import UIKit
 
 class NetworkManager: ObservableObject {
     // Player stats
@@ -35,10 +36,11 @@ class NetworkManager: ObservableObject {
     @Published var loses: Int = 0
 
     // League stats
-    @Published var leagueStandings: [TeamStandingData] = []
+    @Published var leagueStandings: [String] = []
+    @Published var leagueStandingPoints: [Int] = []
     @Published var leagueName: String = ""
     @Published var country: String = ""
-    @Published var leagueLogo: String = ""
+    @Published var leagueLogo: UIImage?
 
     // Lists
     @Published var leagueLists: [String] = []
@@ -66,18 +68,18 @@ class NetworkManager: ObservableObject {
         }
     }
 
-    func fetchPlayerStats(playerId: Int, season: Int) {
-        let playerUrl = "\(baseUrl)?id=\(playerId)&season=\(season)"
+    func fetchPlayerStats(playerId: Int) {
+        let playerUrl = "\(baseUrl)?id=\(playerId)&season=2021"
         self.performStatsRequest(url: playerUrl, urlType: UrlTypes.player)
     }
 
-    func fetchTeamStats(teamId: Int, leagueId: Int, season: Int) {
-        let teamUrl = "\(baseUrl)?team=\(teamId)&league=\(leagueId)&season=\(season)"
+    func fetchTeamStats(teamId: Int, leagueId: Int) {
+        let teamUrl = "\(baseUrl)?team=\(teamId)&league=\(leagueId)&season=2021"
         self.performStatsRequest(url: teamUrl, urlType: UrlTypes.team)
     }
 
-    func fetchLeagueStats(leagueId: Int, season: Int) {
-        let leagueUrl = "\(baseUrl)?league=\(leagueId)&season=\(season)"
+    func fetchLeagueStats(leagueId: Int) {
+        let leagueUrl = "\(baseUrl)/standings?league=\(leagueId)&season=2021"
         self.performStatsRequest(url: leagueUrl, urlType: UrlTypes.league)
     }
 
@@ -228,7 +230,7 @@ class NetworkManager: ObservableObject {
                         self.keyPasses = parsedData.statistics[0].passes.key ?? 0
                         self.interceptions = parsedData.statistics[0].tackles.interceptions ?? 0
                         if let safeConceded = parsedData.statistics[0].goals.conceded,
-                            let safeSaved = parsedData.statistics[0].goals.saved {
+                           let safeSaved = parsedData.statistics[0].goals.saved {
                             self.conceded = safeConceded
                             self.saved = safeSaved
                         }
@@ -250,11 +252,21 @@ class NetworkManager: ObservableObject {
             } else {
                 if let parsedData = parseLeagueJSON(data) {
                     DispatchQueue.main.async {
-                        self.leagueStandings = parsedData.standings[0]
-                        self.leagueName = parsedData.league.name
-                        self.country = parsedData.league.country
-                        if let parsedLogo = parsedData.league.logo {
-                            self.leagueLogo = parsedLogo
+                        let leagueStandings = parsedData.response[0].league.standings[0]
+                        for team in leagueStandings {
+                            let name = team.team.name
+                            let points = team.points
+                            self.leagueStandings.append(name)
+                            self.leagueStandingPoints.append(points)
+                        }
+                        // print(self.leagueStandings)
+                        self.leagueName = parsedData.response[0].league.name
+                        self.country = parsedData.response[0].league.country
+                        if let parsedLogo = parsedData.response[0].league.logo {
+                            let url = NSURL(string: parsedLogo)! as URL
+                            if let imageData: NSData = NSData(contentsOf: url) {
+                                self.leagueLogo = UIImage(data: imageData as Data)
+                            }
                         }
                     }
                 }

@@ -16,8 +16,6 @@ struct StatisticsCell: View {
                     .fill(Color.white)
             }
         }
-        .background(Color(""))
-
     }
 }
 
