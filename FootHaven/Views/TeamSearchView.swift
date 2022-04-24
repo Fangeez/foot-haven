@@ -7,11 +7,9 @@ struct TeamSearchView: View {
     @State var countrySelection: String = ""
     @State var leagueSelection: String = ""
     @State var teamSelection: String = ""
-
     @ObservedObject var networkManager = NetworkManager()
 
     var body: some View {
-
         NavigationView {
             VStack(spacing: 50) {
                 DropDownView(selection: $countrySelection,
@@ -30,7 +28,17 @@ struct TeamSearchView: View {
                 DropDownView(selection: $teamSelection,
                              placeholder: "Select Team",
                              dropDownList: networkManager.teamLists)
-                NavigationLink(destination: TeamSearchResultScreen(activeLink: $showsTeamResultScreen),
+                .onChange(of: teamSelection) { _ in
+                    guard let teamId = networkManager.teamsDict[teamSelection] else { return }
+                    guard let leagueId = networkManager.leaguesDict[leagueSelection] else { return }
+                    networkManager.fetchTeamStats(teamId: teamId, leagueId: leagueId)
+                }
+                NavigationLink(destination: TeamSearchResultScreen(
+                    activeLink: $showsTeamResultScreen,
+                    teamLogo: networkManager.teamLogo,
+                    teamName: networkManager.teamName,
+                    teamStatNames: networkManager.teamStatNames,
+                    teamStatNumbers: networkManager.teamStatNumbers),
                                isActive: $showsTeamResultScreen) {
                     SearchButtonView(activeLink: $showsTeamResultScreen, title: SearchButtonText.team)
                 }

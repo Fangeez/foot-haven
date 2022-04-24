@@ -1,6 +1,10 @@
 //  Created by Harris Dawurang on 3/30/22.
 
 struct TeamData: Codable {
+    let response: TeamResponseData
+}
+
+struct TeamResponseData: Codable {
     let team: TeamInfoData
     let form: String
     let fixtures: Fixtures

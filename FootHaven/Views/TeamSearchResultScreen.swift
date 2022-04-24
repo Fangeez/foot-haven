@@ -4,14 +4,18 @@ import SwiftUI
 
 struct TeamSearchResultScreen: View {
     @Binding var activeLink: Bool
+    var teamLogo: UIImage?
+    var teamName: String
+    var teamStatNames: [String]
+    var teamStatNumbers: [Int]
+    
     var body: some View {
-        // TODO:- Replace mock data with real data
         ZStack {
             Color("AppColor").opacity(0.09)
                 .ignoresSafeArea()
             VStack(alignment: .center, spacing: 40) {
-                TeamInfoCell(teamName: MockPreviews.teamName, teamLogo: UIImage(systemName: MockPreviews.teamLogo))
-                StatisticsCell(statNames: MockPreviews.teamStatNames, statNumbers: MockPreviews.teamStatNumbers)
+                TeamInfoCell(teamName: teamName, teamLogo: teamLogo)
+                StatisticsCell(statNames: teamStatNames, statNumbers: teamStatNumbers)
             }
         }
         .navigationTitle("Team Stats")
@@ -27,6 +31,10 @@ struct TeamSearchResultScreen: View {
 
 struct TeamSearchResultScreen_Previews: PreviewProvider {
     static var previews: some View {
-        TeamSearchResultScreen(activeLink: .constant(true))
+        TeamSearchResultScreen(activeLink: .constant(true),
+                               teamLogo: UIImage(systemName: MockPreviews.teamLogo),
+                               teamName: MockPreviews.teamName,
+                               teamStatNames: MockPreviews.teamStatNames,
+                               teamStatNumbers: MockPreviews.teamStatNumbers)
     }
 }
