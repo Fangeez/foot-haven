@@ -26,35 +26,33 @@ class NetworkManager: ObservableObject {
     @Published var height: String = ""
     @Published var weight: String = ""
     @Published var photo: String? = ""
-
+    
     // Team stats
     @Published var teamName: String = ""
-    @Published var teamLogo: String = ""
-    @Published var played: Int = 0
-    @Published var wins: Int = 0
-    @Published var draws: Int = 0
-    @Published var loses: Int = 0
-
+    @Published var teamLogo: UIImage?
+    @Published var teamStatNames: [String] = []
+    @Published var teamStatNumbers: [Int] = []
+    
     // League stats
     @Published var leagueStandings: [String] = []
     @Published var leagueStandingPoints: [Int] = []
     @Published var leagueName: String = ""
     @Published var country: String = ""
     @Published var leagueLogo: UIImage?
-
+    
     // Lists
     @Published var leagueLists: [String] = []
     @Published var teamLists: [String] = []
     @Published var teamObjectLists: [TeamListInfo] = []
     @Published var playerLists: [String] = []
-
+    
     // Dicts
     @Published var leaguesDict: [String: Int] = [:]
     @Published var teamsDict: [String: Int] = [:]
     @Published var playersDict: [String: Int] = [:]
-
+    
     private let baseUrl: String = "https://v3.football.api-sports.io"
-
+    
     private var apiKey: String {
         get {
             guard let filePath = Bundle.main.path(forResource: "APIFootball-Info", ofType: "plist") else {
@@ -67,32 +65,32 @@ class NetworkManager: ObservableObject {
             return value
         }
     }
-
+    
     func fetchPlayerStats(playerId: Int) {
         let playerUrl = "\(baseUrl)?id=\(playerId)&season=2021"
         self.performStatsRequest(url: playerUrl, urlType: UrlTypes.player)
     }
-
+    
     func fetchTeamStats(teamId: Int, leagueId: Int) {
-        let teamUrl = "\(baseUrl)?team=\(teamId)&league=\(leagueId)&season=2021"
+        let teamUrl = "\(baseUrl)/teams/statistics?team=\(teamId)&league=\(leagueId)&season=2021"
         self.performStatsRequest(url: teamUrl, urlType: UrlTypes.team)
     }
-
+    
     func fetchLeagueStats(leagueId: Int) {
         let leagueUrl = "\(baseUrl)/standings?league=\(leagueId)&season=2021"
         self.performStatsRequest(url: leagueUrl, urlType: UrlTypes.league)
     }
-
+    
     func fetchLeagueLists(country: String) {
         let leaguesUrl = "\(baseUrl)/leagues?country=\(country)&season=2021"
         let semaphore = DispatchSemaphore(value: 0)
-
+        
         var request = URLRequest(url: URL(string: leaguesUrl)!, timeoutInterval: Double.infinity)
         request.addValue(self.apiKey, forHTTPHeaderField: "x-rapidapi-key")
         request.addValue(self.baseUrl, forHTTPHeaderField: "x-rapidapi-host")
-
+        
         request.httpMethod = "GET"
-
+        
         let task = URLSession.shared.dataTask(with: request) { data, _, error in
             guard let data = data else {
                 print(String(describing: error))
@@ -100,7 +98,7 @@ class NetworkManager: ObservableObject {
                 return
             }
             print(String(data: data, encoding: .utf8)!)
-
+            
             if let parsedData = parseLeagueListJSON(data) {
                 DispatchQueue.main.async {
                     var leagueList: [String] = []
@@ -113,23 +111,23 @@ class NetworkManager: ObservableObject {
                     self.leagueLists = leagueList
                 }
             }
-
+            
             semaphore.signal()
         }
-
+        
         task.resume()
         semaphore.wait()
     }
-
+    
     func fetchTeamLists(league: Int) {
         let teamsUrl = "\(baseUrl)/teams?league=\(league)&season=2021"
         let semaphore = DispatchSemaphore(value: 0)
         var request = URLRequest(url: URL(string: teamsUrl)!, timeoutInterval: Double.infinity)
         request.addValue(self.apiKey, forHTTPHeaderField: "x-rapidapi-key")
         request.addValue(self.baseUrl, forHTTPHeaderField: "x-rapidapi-host")
-
+        
         request.httpMethod = "GET"
-
+        
         let task = URLSession.shared.dataTask(with: request) { data, _, error in
             guard let data = data else {
                 print(String(describing: error))
@@ -137,7 +135,7 @@ class NetworkManager: ObservableObject {
                 return
             }
             print(String(data: data, encoding: .utf8)!)
-
+            
             if let parsedData = parseTeamListJSON(data) {
                 DispatchQueue.main.async {
                     var teamList: [String] = []
@@ -155,16 +153,16 @@ class NetworkManager: ObservableObject {
         task.resume()
         semaphore.wait()
     }
-
+    
     func fetchPlayerLists(team: Int, league: Int) {
         let playersUrl = "\(baseUrl)/players?league=\(league)&team=\(team)&season=2021"
         let semaphore = DispatchSemaphore(value: 0)
         var request = URLRequest(url: URL(string: playersUrl)!, timeoutInterval: Double.infinity)
         request.addValue(self.apiKey, forHTTPHeaderField: "x-rapidapi-key")
         request.addValue(self.baseUrl, forHTTPHeaderField: "x-rapidapi-host")
-
+        
         request.httpMethod = "GET"
-
+        
         let task = URLSession.shared.dataTask(with: request) { data, _, error in
             guard let data = data else {
                 print(String(describing: error))
@@ -172,7 +170,7 @@ class NetworkManager: ObservableObject {
                 return
             }
             print(String(data: data, encoding: .utf8)!)
-
+            
             if let parsedData = parsePlayerListJSON(data) {
                 DispatchQueue.main.async {
                     var playerList: [String] = []
@@ -191,16 +189,16 @@ class NetworkManager: ObservableObject {
         task.resume()
         semaphore.wait()
     }
-
+    
     private func performStatsRequest(url: String, urlType: UrlTypes) {
         let semaphore = DispatchSemaphore(value: 0)
-
+        
         var request = URLRequest(url: URL(string: url)!, timeoutInterval: Double.infinity)
         request.addValue(self.apiKey, forHTTPHeaderField: "x-rapidapi-key")
         request.addValue(self.baseUrl, forHTTPHeaderField: "x-rapidapi-host")
-
+        
         request.httpMethod = "GET"
-
+        
         let task = URLSession.shared.dataTask(with: request) { data, _, error in
             guard let data = data else {
                 print(String(describing: error))
@@ -239,14 +237,27 @@ class NetworkManager: ObservableObject {
             } else if urlType == UrlTypes.team {
                 if let parsedData = parseTeamJSON(data) {
                     DispatchQueue.main.async {
-                        self.teamName = parsedData.team.name
-                        if let logo = parsedData.team.logo {
-                            self.teamLogo = logo
+                        self.teamName = parsedData.response.team.name
+                        if let logo = parsedData.response.team.logo {
+                            let url = NSURL(string: logo)! as URL
+                            if let imageData: NSData = NSData(contentsOf: url) {
+                                self.teamLogo = UIImage(data: imageData as Data)
+                            }
                         }
-                        self.played = parsedData.fixtures.played.total
-                        self.wins = parsedData.fixtures.wins.total
-                        self.draws = parsedData.fixtures.draws.total
-                        self.loses = parsedData.fixtures.loses.total
+                        self.teamStatNames = []
+                        self.teamStatNumbers = []
+                        let played = parsedData.response.fixtures.played.total
+                        self.teamStatNames.append("Matches Played")
+                        self.teamStatNumbers.append(played)
+                        let wins = parsedData.response.fixtures.wins.total
+                        self.teamStatNames.append("Matches Won")
+                        self.teamStatNumbers.append(wins)
+                        let draws = parsedData.response.fixtures.draws.total
+                        self.teamStatNames.append("Matches Drawn")
+                        self.teamStatNumbers.append(draws)
+                        let losses = parsedData.response.fixtures.loses.total
+                        self.teamStatNames.append("Matches Lost")
+                        self.teamStatNumbers.append(losses)
                     }
                 }
             } else {
@@ -274,9 +285,9 @@ class NetworkManager: ObservableObject {
             }
             semaphore.signal()
         }
-
+        
         task.resume()
         semaphore.wait()
     }
-
+    
 }
