@@ -8,7 +8,7 @@ struct PlayerSearchResultScreen: View {
     var playerName: String
     var playerDetails: [String]
     var playerStatNames: [String]
-    var playerStatNumbers: [Int]
+    var playerStatNumbers: [String]
     var body: some View {
         ZStack {
             Color("AppColor").opacity(0.09)

@@ -7,7 +7,7 @@ struct TeamSearchResultScreen: View {
     var teamLogo: UIImage?
     var teamName: String
     var teamStatNames: [String]
-    var teamStatNumbers: [Int]
+    var teamStatNumbers: [String]
 
     var body: some View {
         ZStack {

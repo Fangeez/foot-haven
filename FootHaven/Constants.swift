@@ -16,14 +16,14 @@ struct MockPreviews {
         "Games Played", "Goals", "Assists", "Total Passes", "Key Passes", "Tackles",
         "Interceptions", "Conceded", "Saved", "Dribble Attempts", "Successful Dribbles"
     ]
-    static let playerStatNumbers: [Int] = [19, 14, 5, 140, 18, 6, 2, 0, 0, 29, 20]
+    static let playerStatNumbers: [String] = ["19", "14", "5", "140", "18", "6", "2", "0", "0", "29", "20"]
     static let teamName: String = "Tokyo Revengers"
     static let teamLogo: String = "dongsign.circle.fill"
     static let teamStatNames: [String] = ["Games Played", "Wins", "Draws", "Losses"]
-    static let teamStatNumbers: [Int] = [19, 9, 5, 5]
+    static let teamStatNumbers: [String] = ["19", "9", "5", "5"]
     static let leagueStandings: [String] =
     ["Manchester City", "Liverpool", "Chelsea", "Arsenal", "Manchester United", "Tottenham Hotspur"]
-    static let leaguePoints: [Int] = [87, 85, 72, 67, 60, 59]
+    static let leaguePoints: [String] = ["87", "85", "72", "67", "60", "59"]
     static let leagueName: String = "Premier League"
     static let leagueLogo: String = "ant.fill"
 }

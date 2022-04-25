@@ -4,7 +4,7 @@ import SwiftUI
 
 struct StatisticsCell: View {
     var statNames: [String]
-    var statNumbers: [Int]
+    var statNumbers: [String]
     var body: some View {
         List {
 

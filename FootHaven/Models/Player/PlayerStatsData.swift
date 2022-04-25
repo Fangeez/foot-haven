@@ -23,7 +23,7 @@ struct Goals: Codable {
 }
 
 struct Games: Codable {
-    let appearances: Int?
+    let appearences: Int?
     let minutes: Int?
 }
 

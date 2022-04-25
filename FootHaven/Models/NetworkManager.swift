@@ -9,7 +9,7 @@ import UIKit
 class NetworkManager: ObservableObject {
     // Player stats
     @Published var playerStatNames: [String] = []
-    @Published var playerStatNumbers: [Int] = []
+    @Published var playerStatNumbers: [String] = []
     @Published var playerName: String = ""
     @Published var playerImage: UIImage?
     @Published var playerDetails: [String] = []
@@ -18,11 +18,11 @@ class NetworkManager: ObservableObject {
     @Published var teamName: String = ""
     @Published var teamLogo: UIImage?
     @Published var teamStatNames: [String] = []
-    @Published var teamStatNumbers: [Int] = []
+    @Published var teamStatNumbers: [String] = []
 
     // League stats
     @Published var leagueStandings: [String] = []
-    @Published var leagueStandingPoints: [Int] = []
+    @Published var leagueStandingPoints: [String] = []
     @Published var leagueName: String = ""
     @Published var country: String = ""
     @Published var leagueLogo: UIImage?
@@ -163,9 +163,9 @@ class NetworkManager: ObservableObject {
                     var playerList: [String] = []
                     var playerDict: [String: Int] = [:]
                     for player in parsedData.response {
-                        let fullName = "\(player.response[0].player.firstname) \(player.response[0].player.lastname)"
+                        let fullName = "\(player.player.firstname) \(player.player.lastname)"
                         playerList.append(fullName)
-                        playerDict[fullName] = player.response[0].player.id
+                        playerDict[fullName] = player.player.id
                     }
                     self.playerLists = playerList
                     self.playersDict = playerDict
@@ -213,22 +213,25 @@ class NetworkManager: ObservableObject {
                                 self.playerImage = UIImage(data: imageData as Data)
                             }
                         }
-                        var statNumbers: [Int] = []
+                        var statNumbers: [String] = []
                         self.playerStatNames = MockPreviews.playerStatNames
-                        statNumbers.append(parsedData.response[0].statistics[0].games.appearances ?? 0)
-                        statNumbers.append(parsedData.response[0].statistics[0].goals.total ?? 0)
-                        statNumbers.append(parsedData.response[0].statistics[0].goals.assists ?? 0)
-                        statNumbers.append(parsedData.response[0].statistics[0].passes.total ?? 0)
-                        statNumbers.append(parsedData.response[0].statistics[0].passes.key ?? 0)
-                        statNumbers.append(parsedData.response[0].statistics[0].tackles.total ?? 0)
-                        statNumbers.append(parsedData.response[0].statistics[0].tackles.interceptions ?? 0)
+                        statNumbers.append("\(parsedData.response[0].statistics[0].games.appearences ?? 0)")
+                        statNumbers.append("\(parsedData.response[0].statistics[0].goals.total ?? 0)")
+                        statNumbers.append("\(parsedData.response[0].statistics[0].goals.assists ?? 0)")
+                        statNumbers.append("\(parsedData.response[0].statistics[0].passes.total ?? 0)")
+                        statNumbers.append("\(parsedData.response[0].statistics[0].passes.key ?? 0)")
+                        statNumbers.append("\(parsedData.response[0].statistics[0].tackles.total ?? 0)")
+                        statNumbers.append("\(parsedData.response[0].statistics[0].tackles.interceptions ?? 0)")
                         if let safeConceded = parsedData.response[0].statistics[0].goals.conceded,
                            let safeSaved = parsedData.response[0].statistics[0].goals.saved {
-                            statNumbers.append(safeConceded)
-                            statNumbers.append(safeSaved)
+                            statNumbers.append("\(safeConceded)")
+                            statNumbers.append("\(safeSaved)")
+                        } else {
+                            statNumbers.append("N/A")
+                            statNumbers.append("N/A")
                         }
-                        statNumbers.append(parsedData.response[0].statistics[0].dribbles.attempts ?? 0)
-                        statNumbers.append(parsedData.response[0].statistics[0].dribbles.success ?? 0)
+                        statNumbers.append("\(parsedData.response[0].statistics[0].dribbles.attempts ?? 0)")
+                        statNumbers.append("\(parsedData.response[0].statistics[0].dribbles.success ?? 0)")
                         self.playerStatNumbers = statNumbers
                     }
                 }
@@ -246,16 +249,16 @@ class NetworkManager: ObservableObject {
                         self.teamStatNumbers = []
                         let played = parsedData.response.fixtures.played.total
                         self.teamStatNames.append("Matches Played")
-                        self.teamStatNumbers.append(played)
+                        self.teamStatNumbers.append("\(played)")
                         let wins = parsedData.response.fixtures.wins.total
                         self.teamStatNames.append("Matches Won")
-                        self.teamStatNumbers.append(wins)
+                        self.teamStatNumbers.append("\(wins)")
                         let draws = parsedData.response.fixtures.draws.total
                         self.teamStatNames.append("Matches Drawn")
-                        self.teamStatNumbers.append(draws)
+                        self.teamStatNumbers.append("\(draws)")
                         let losses = parsedData.response.fixtures.loses.total
                         self.teamStatNames.append("Matches Lost")
-                        self.teamStatNumbers.append(losses)
+                        self.teamStatNumbers.append("\(losses)")
                     }
                 }
             } else {
@@ -268,7 +271,7 @@ class NetworkManager: ObservableObject {
                             let name = team.team.name
                             let points = team.points
                             self.leagueStandings.append(name)
-                            self.leagueStandingPoints.append(points)
+                            self.leagueStandingPoints.append("\(points)")
                         }
                         self.leagueName = parsedData.response[0].league.name
                         self.country = parsedData.response[0].league.country
