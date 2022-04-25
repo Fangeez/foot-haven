@@ -30,6 +30,7 @@
 		A330D87C27FB6E4A005BBC03 /* DropDownView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A330D87B27FB6E4A005BBC03 /* DropDownView.swift */; };
 		A330D87E27FB7843005BBC03 /* SearchButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A330D87D27FB7843005BBC03 /* SearchButtonView.swift */; };
 		A331D9CA27FE890B005F2F69 /* ToolbarBackButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = A331D9C927FE890B005F2F69 /* ToolbarBackButton.swift */; };
+		A34B4F0E2815C38C00326AFB /* PlayerInfoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A34B4F0D2815C38C00326AFB /* PlayerInfoCell.swift */; };
 		A371691527FCC7F50000961A /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = A371691427FCC7F50000961A /* Constants.swift */; };
 		A371691727FCE9B30000961A /* TeamInfoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A371691627FCE9B30000961A /* TeamInfoCell.swift */; };
 		A397EC9827FB858700A5FDB3 /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A397EC9727FB858700A5FDB3 /* Launch Screen.storyboard */; };
@@ -68,6 +69,7 @@
 		A330D87B27FB6E4A005BBC03 /* DropDownView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DropDownView.swift; sourceTree = "<group>"; };
 		A330D87D27FB7843005BBC03 /* SearchButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchButtonView.swift; sourceTree = "<group>"; };
 		A331D9C927FE890B005F2F69 /* ToolbarBackButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToolbarBackButton.swift; sourceTree = "<group>"; };
+		A34B4F0D2815C38C00326AFB /* PlayerInfoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerInfoCell.swift; sourceTree = "<group>"; };
 		A371691427FCC7F50000961A /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		A371691627FCE9B30000961A /* TeamInfoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamInfoCell.swift; sourceTree = "<group>"; };
 		A397EC9727FB858700A5FDB3 /* Launch Screen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
@@ -110,6 +112,7 @@
 				A3EE28F227FD016300419828 /* TeamSearchResultScreen.swift */,
 				A3EE28F427FD017600419828 /* LeagueSearchResultScreen.swift */,
 				A331D9C927FE890B005F2F69 /* ToolbarBackButton.swift */,
+				A34B4F0D2815C38C00326AFB /* PlayerInfoCell.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -295,6 +298,7 @@
 				A319328F27F49EC5003AA4DE /* PlayerInfoData.swift in Sources */,
 				A331D9CA27FE890B005F2F69 /* ToolbarBackButton.swift in Sources */,
 				A31932A227F53EE5003AA4DE /* UrlTypes.swift in Sources */,
+				A34B4F0E2815C38C00326AFB /* PlayerInfoCell.swift in Sources */,
 				A330D87E27FB7843005BBC03 /* SearchButtonView.swift in Sources */,
 				A3EE28F127FD013E00419828 /* PlayerSearchResultScreen.swift in Sources */,
 				A319329127F4AE6E003AA4DE /* TeamData.swift in Sources */,

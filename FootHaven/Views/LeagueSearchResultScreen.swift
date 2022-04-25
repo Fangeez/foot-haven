@@ -7,7 +7,7 @@ struct LeagueSearchResultScreen: View {
     var leagueName: String
     var leagueLogo: UIImage?
     var leagueStandings: [String]
-    var leagueStandingPoints: [Int]
+    var leagueStandingPoints: [String]
     var body: some View {
         VStack(alignment: .center, spacing: 40) {
             TeamInfoCell(teamName: leagueName, teamLogo: leagueLogo)
