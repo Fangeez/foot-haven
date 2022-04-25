@@ -9,6 +9,14 @@ struct SearchButtonText {
 }
 
 struct MockPreviews {
+    static let playerName: String = "Crispy Bacon"
+    static let playerImage: String = "person.circle.fill"
+    static let playerDetails: [String] = ["Nigeria", "25", "5'9", "180 lbs"]
+    static let playerStatNames: [String] = [
+        "Games Played", "Goals", "Assists", "Total Passes", "Key Passes", "Tackles",
+        "Interceptions", "Conceded", "Saved", "Dribble Attempts", "Successful Dribbles"
+    ]
+    static let playerStatNumbers: [Int] = [19, 14, 5, 140, 18, 6, 2, 0, 0, 29, 20]
     static let teamName: String = "Tokyo Revengers"
     static let teamLogo: String = "dongsign.circle.fill"
     static let teamStatNames: [String] = ["Games Played", "Wins", "Draws", "Losses"]

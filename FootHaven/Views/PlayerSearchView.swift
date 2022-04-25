@@ -38,8 +38,20 @@ struct PlayerSearchView: View {
             DropDownView(selection: $playerSelection,
                          placeholder: "Select Player",
                          dropDownList: networkManager.playerLists)
-            SearchButtonView(activeLink: $showPlayerResultScreen,
-                             title: SearchButtonText.player)
+            .onChange(of: playerSelection) { _ in
+                guard let playerId = networkManager.playersDict[playerSelection] else { return }
+                networkManager.fetchPlayerStats(playerId: playerId)
+            }
+            NavigationLink(destination: PlayerSearchResultScreen(activeLink: $showPlayerResultScreen,
+                                                                 playerImage: networkManager.playerImage ,
+                                                                 playerName: networkManager.playerName,
+                                                                 playerDetails: networkManager.playerDetails,
+                                                                 playerStatNames: networkManager.playerStatNames,
+                                                                 playerStatNumbers: networkManager.playerStatNumbers), isActive: $showPlayerResultScreen ) {
+                SearchButtonView(activeLink: $showPlayerResultScreen,
+                                 title: SearchButtonText.player)
+            }
+
         }
     }
 }
